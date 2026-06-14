@@ -6,16 +6,18 @@ use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 
-// ទំព័រដើម (Welcome Page)
+// =========================================================
+// ទំព័រដើម (ប្តូរពីបង្ហាញ welcome ទៅជាលោតទៅទំព័រ Login ហ្មង)
+// =========================================================
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 // កែប្រែឱ្យវាហៅទៅកាន់ SalesOrderController ត្រង់ index method វិញ
 Route::get('/dashboard', [\App\Http\Controllers\SalesOrderController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-    
+
 // ម៉ូឌុលគ្រប់គ្រង Profile របស់អ្នកប្រើប្រាស់ (រៀបចំដោយ Laravel Breeze)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
